@@ -1,7 +1,5 @@
 // 从刚刚安装的库中加载数据
 const addressData = require('china-area-data/v3/data')
-// 引入 lodash，lodash 是一个实用工具库，提供了很多常用的方法
-import _ from 'lodash'
 
 // 注册一个名为 select-district 的 Vue 组件
 Vue.component('select-district', {
