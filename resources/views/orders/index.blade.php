@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', '订单列表')
-@inject(OderModel, App\Models\Order)
+@inject(orderModel, App\Models\Order)
 
 @section('content')
   <div class="row">
@@ -49,10 +49,10 @@
                             <td rowspan="{{ count($order->items) }}" class="text-center total-amount">￥{{ $order->total_amount }}</td>
                             <td rowspan="{{ count($order->items) }}" class="text-center">
                               @if($order->paid_at)
-                                @if($order->refund_status === OderModel::REFUND_STATUS_PENDING)
+                                @if($order->refund_status === $orderModel::REFUND_STATUS_PENDING)
                                   已支付
                                 @else
-                                  {{ OderModel::$refundStatusMap[$order->refund_status] }}
+                                  {{ $orderModel::$refundStatusMap[$order->refund_status] }}
                                 @endif
                               @elseif($order->closed)
                                 已关闭
