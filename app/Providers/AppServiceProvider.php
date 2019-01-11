@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Log\Logger;
 use Illuminate\Support\ServiceProvider;
+use Monolog\Logger;
 use Yansongda\Pay\Pay;
 
 class AppServiceProvider extends ServiceProvider
