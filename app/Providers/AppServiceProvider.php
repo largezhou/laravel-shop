@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
 use Yansongda\Pay\Pay;
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
             'products.index',
             'products.show',
         ], \App\Http\ViewComposers\CategoryTreeComposer::class);
+
+        Carbon::setLocale('zh');
     }
 
     /**
