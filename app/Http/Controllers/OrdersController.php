@@ -10,6 +10,7 @@ use App\Http\Requests\CrowdFundingOrderRequest;
 use App\Http\Requests\OrderRequest;
 use App\Http\Requests\SendReviewRequest;
 use App\Models\CouponCode;
+use App\Models\CrowdfundingProduct;
 use App\Models\Order;
 use App\Models\ProductSku;
 use App\Models\UserAddress;
@@ -62,9 +63,15 @@ class OrdersController extends Controller
         // 校验权限
         $this->authorize('own', $order);
 
-        // 判断订单的发货状态是否为已发货
-        if ($order->ship_status !== Order::SHIP_STATUS_DELIVERED) {
-            throw new InvalidRequestException('发货状态不正确');
+        if ($order->ship_status !== Order::SHIP_STATUS_PENDING) {
+            throw new InvalidRequestException('该订单已发货');
+        }
+        // 众筹订单只有在众筹成功之后发货
+        if (
+            $order->type === Order::TYPE_CROWDFUNDING
+            && $order->items[0]->product->crowdfunding->status !== CrowdfundingProduct::STATUS_SUCCESS
+        ) {
+            throw new InvalidRequestException('众筹订单只能在众筹成功之后发货');
         }
 
         // 更新发货状态为已收到
@@ -129,6 +136,10 @@ class OrdersController extends Controller
         // 判断订单是否已付款
         if (!$order->paid_at) {
             throw new InvalidRequestException('该订单未支付，不可退款');
+        }
+        // 众筹订单不允许申请退款
+        if ($order->type === Order::TYPE_CROWDFUNDING) {
+            throw new InvalidRequestException('众筹订单不支持退款');
         }
         // 判断订单退款状态是否正确
         if ($order->refund_status !== Order::REFUND_STATUS_PENDING) {
