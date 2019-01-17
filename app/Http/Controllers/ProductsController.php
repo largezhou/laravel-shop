@@ -80,7 +80,7 @@ class ProductsController extends Controller
         // 用户未登录时返回的是 null，已登录时返回的是对应的用户对象
         if ($user = $request->user()) {
             // 从当前用户已收藏的商品中搜索 id 为当前商品 id 的商品
-            $favored = (bool)$user->favoriteProducts()->find($product->id);
+            $favored = (bool) $user->favoriteProducts()->find($product->id);
         }
 
         $reviews = OrderItem::query()
