@@ -130,12 +130,7 @@
               <!-- 支付按钮结束 -->
 
               <!-- 如果订单的发货状态为已发货则展示确认收货按钮 -->
-              @if(
-                $order->ship_status === $orderModel::SHIP_STATUS_DELIVERED
-                && $order->refund_status !== \App\Models\Order::REFUND_STATUS_SUCCESS
-                && ($order->type !== \App\Models\Order::TYPE_CROWDFUNDING
-                    || $order->items[0]->product->crowdfunding->status === \App\Models\CrowdfundingProduct::STATUS_SUCCESS)
-              )
+              @if($order->ship_status === $orderModel::SHIP_STATUS_DELIVERED)
                 <div class="receive-button">
                   <!-- 将原本的表单替换成下面这个按钮 -->
                   <button type="button" id="btn-receive" class="btn btn-sm btn-success">确认收货</button>

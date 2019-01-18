@@ -4,8 +4,6 @@ namespace App\Console\Commands\Cron;
 
 use App\Jobs\RefundCrowdfundingOrders;
 use App\Models\CrowdfundingProduct;
-use App\Models\Order;
-use App\Services\OrderService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 
@@ -45,7 +43,7 @@ class FinishCrowdfunding extends Command
         ]);
     }
 
-    protected function crowdfundingFailed(CrowdfundingProduct $crowdfunding, OrderService $orderService)
+    protected function crowdfundingFailed(CrowdfundingProduct $crowdfunding)
     {
         $crowdfunding->update([
             'status' => CrowdfundingProduct::STATUS_FAIL,
