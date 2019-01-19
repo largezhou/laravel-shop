@@ -78,8 +78,8 @@
                 <td>{{ $item->due_date->format('Y-m-d') }}</td>
                 <td>
                   <!-- 如果是未还款 -->
-                  @if(is_null($item->paid_at))
-                    <!-- 这里使用了我们之前在模型里定义的访问器 -->
+                @if(is_null($item->paid_at))
+                  <!-- 这里使用了我们之前在模型里定义的访问器 -->
                     @if($item->is_overdue)
                       <span class="overdue">已逾期</span>
                     @else
@@ -103,4 +103,24 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scriptsAfterJs')
+  <script>
+  $(document).ready(function() {
+    $('#btn-wechat').click(function() {
+      swal({
+        content: $('<img src="{{ route('installments.wechat', ['installment' => $installment->id]) }}" />')[0],
+        // buttons 参数可以设置按钮显示的文案
+        buttons: ['关闭', '已完成付款'],
+      })
+        .then(function(result) {
+          // 如果用户点击了 已完成付款 按钮，则重新加载页面
+          if (result) {
+            location.reload()
+          }
+        })
+    })
+  })
+  </script>
 @endsection
