@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('cron:finish-crowdfunding')->everyMinute();
+        $schedule->command('cron:calculate-installment-fine')->daily();
     }
 
     /**
