@@ -73,4 +73,25 @@ class Installment extends Model
 
         return false;
     }
+
+    /**
+     * 根据每一期的还款的退款状态，修改分期付款的退款状态
+     */
+    public function refreshRefundStatus()
+    {
+        $allSuccess = true;
+        // 重新加载 items，保证与数据库中数据同步
+        $this->load(['items']);
+        foreach ($this->items as $item) {
+            if ($item->paid_at && $item->refund_status !== InstallmentItem::REFUND_STATUS_SUCCESS) {
+                $allSuccess = false;
+                break;
+            }
+        }
+        if ($allSuccess) {
+            $this->order->update([
+                'refund_status' => Order::REFUND_STATUS_SUCCESS,
+            ]);
+        }
+    }
 }
