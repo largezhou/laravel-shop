@@ -11,7 +11,7 @@
  Target Server Version : 50722
  File Encoding         : 65001
 
- Date: 21/01/2019 17:07:25
+ Date: 22/01/2019 10:07:12
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `admin_menu`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin_menu
@@ -51,6 +51,7 @@ INSERT INTO `admin_menu` VALUES (11, 0, 7, '优惠券菜单', 'fa-tags', '/coupo
 INSERT INTO `admin_menu` VALUES (12, 0, 5, '类目管理', 'fa-bars', '/categories', NULL, '2019-01-16 17:18:43', '2019-01-17 11:51:35');
 INSERT INTO `admin_menu` VALUES (13, 9, 4, '众筹商品', 'fa-flag-checkered', '/crowdfunding_products', NULL, '2019-01-17 11:50:31', '2019-01-17 11:51:35');
 INSERT INTO `admin_menu` VALUES (14, 9, 0, '普通商品', 'fa-cubes', '/products', NULL, '2019-01-17 11:52:05', '2019-01-17 11:52:05');
+INSERT INTO `admin_menu` VALUES (15, 9, 0, '秒杀商品', 'fa-bolt', '/seckill_products', NULL, '2019-01-22 10:03:07', '2019-01-22 10:03:07');
 
 -- ----------------------------
 -- Table structure for admin_permissions
